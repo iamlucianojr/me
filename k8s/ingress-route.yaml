@@ -1,0 +1,31 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: portfolio-ingress-route
+  namespace: portfolio
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`lucianojr.com.br`)
+    kind: Rule
+    services:
+    - name: portfolio-service
+      port: 80
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: portfolio-ingress-route-tls
+  namespace: portfolio
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`lucianojr.com.br`)
+    kind: Rule
+    services:
+    - name: portfolio-service
+      port: 80
+  tls:
+    secretName: portfolio-tls

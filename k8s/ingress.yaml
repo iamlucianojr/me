@@ -6,26 +6,17 @@ metadata:
   annotations:
     cert-manager.io/issuer: letsencrypt-portfolio
     # cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     # nginx.ingress.kubernetes.io/ssl-redirect: "true" # Nginx specific
 spec:
   # ingressClassName: nginx # Removing to let default controller (Traefik) pick it up
   tls:
     - hosts:
         - lucianojr.com.br
-        - lucianojr.pt
       secretName: portfolio-tls
   rules:
     - host: lucianojr.com.br
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: portfolio-service
-                port:
-                  number: 80
-    - host: lucianojr.pt
       http:
         paths:
           - path: /

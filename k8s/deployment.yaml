@@ -15,9 +15,12 @@ spec:
       labels:
         app: portfolio
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: portfolio
-          image: lucianojr/portfolio:latest
+          image: ghcr.io/iamlucianojr/me:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           resources:
