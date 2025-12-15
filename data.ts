@@ -1,133 +1,92 @@
 import { BlogPost, SocialLink } from './types';
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { platform: 'Twitter', url: '#', icon: 'twitter' },
-  { platform: 'GitHub', url: '#', icon: 'github' },
-  { platform: 'LinkedIn', url: '#', icon: 'linkedin' },
-  { platform: 'Email', url: 'mailto:hello@example.com', icon: 'mail' },
+  { platform: 'GitHub', url: 'https://github.com/iamlucianojr', icon: 'github' },
+  { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/lucianogoncalvesjunior/', icon: 'linkedin' },
+  { platform: 'Email', url: 'mailto:luciano@lucianojr.com.br', icon: 'mail' },
 ];
 
 export const RESUME_MARKDOWN = `
-# Alex Dev
+# Luciano Junior
 
-**Senior Frontend Engineer**  
-San Francisco, CA • alex@example.com
+**Senior Software Engineer**  
+Porto, Portugal • luciano@lucianojr.com.br
 
 ---
 
 ## Profile
-Passionate React engineer with a focus on UI/UX and performance. I build scalable web applications with a minimalist aesthetic.
+Passionate software engineer with a focus on backendm, performance and observability. I build scalable applications.
 
 ## Experience
 
-### Senior Frontend Engineer @ TechCorp
-*2021 - Present*
-- Led the migration of a legacy monolithic app to a micro-frontend architecture using React and TypeScript.
-- Improved site performance by 40% through code splitting and lazy loading strategies.
-- Mentored junior developers and established coding standards.
+### Senior Backend Engineer @ Worten
+*2024 - Present*
+- As a Senior Backend Engineer on Worten’s Service Lifecycle Manager (SLM) team, I designed and implemented scalable backend services in Go (Golang) to support the company’s post-sales ecosystem. My work focused on automating and optimizing processes around warranty extensions, damage protection, alarm systems, acquisition of energy and telecom services, and tech & home Worten plans.
+- Developed and maintained microservices in Golang, ensuring reliability, high performance, and clean architecture principles.
+- Designed RESTful APIs and integrated them with internal and third-party systems, handling customer contracts and service plans.
+- Participated in architectural discussions, code reviews, and Go best practices adoption within the backend engineering guild.
 
-### Frontend Developer @ StartupInc
-*2018 - 2021*
-- Built the initial MVP for a fintech product used by 10k+ users.
-- Implemented a design system using Tailwind CSS to ensure consistency across the platform.
+### Senior Backend Engineer @ Barkyn
+*2021 - 2023*
+- I have been leading the development and maintenance of our backend platform and infrastructure.
+- Designing and Implementing Domain-Centric APIs and Lambda Functions: Crafting specialized APIs and serverless computing functions to streamline processes and enhance system efficiency.
+- E-Commerce Platform Management: Utilizing Prestashop and Shopify as the core engines for our e-commerce operations, ensuring a seamless online shopping experience for our customers.
+- Integration of Third-Party Services: Successfully integrating various third-party providers to optimize our payment systems, shipping logistics, and financial automation processes. This integration has been pivotal in creating a robust and efficient operational framework.
+
+### Senior Backend Engineer @ Exads
+*2020 - 2021*
+- Spearheaded the development and deployment of new backend functionalities, focusing on creating robust and scalable solutions.
+- Ad-Serving Project Enhancement: A key aspect of my role is to bolster our ad-serving project. I handle the processing and analysis of a massive data stream, managing over 11 billion daily impressions. My contribution is crucial in optimizing data processing workflows and ensuring high efficiency.
+- Transactional Software Platform Support: I provide critical support and continuous improvements to our transactional software platform. My responsibilities include ensuring system reliability, performance tuning, and implementing updates as needed.
+- Technical Proficiency: Utilized advanced technologies like Kafka (for large-scale data streaming), Go (for backend development), and the Symfony framework with PHP to build and maintain dynamic backend systems.
+
 
 ## Skills
-- **Languages:** TypeScript, JavaScript (ES6+), HTML5, CSS3
-- **Frameworks:** React, Next.js, Astro
-- **Tools:** Git, Webpack, Vite, Docker
-- **Design:** Figma, Adobe XD
+- **Languages & Frameworks:** Go (Golang), PHP (Laravel, Lumen), TypeScript, Bash scripting.
+- **Databases & Caching:** PostgreSQL, MySQL, MongoDB, Redis, Elasticsearch — with experience in designing optimized, scalable data models and performance tuning.
+- **Infrastructure & DevOps:** Nginx, Docker, Kubernetes, Terraform, Grafana, Kibana, Prometheus — proficient in building and managing containerized and cloud-native environments on AWS and Google Cloud Platform (GCP). Experienced in implementing automated CI/CD pipelines that streamline delivery and ensure reliability.
+- **Messaging & Integration:** Kafka, RabbitMQ, gRPC, and REST APIs — skilled in building distributed systems and event-driven architectures with a focus on scalability, fault tolerance, and performance.
+- **Architecture & Design Principles:** CQRS, Event Sourcing, Domain-Driven Design (DDD), and SOLID principles. Strong advocate of clean code, object-oriented design, and proven design patterns to ensure maintainable and extensible systems.
+- **Observability:** Prometheus, Grafana, ELK Stack (Elasticsearch, Logstash, Kibana) — experienced in setting up and maintaining monitoring and logging systems to track system performance and identify potential issues.
+- **Security & Authentication:** Hands-on experience with JWT and OAuth modern authentication mechanisms to secure APIs and distributed services.
+- **Miscellaneous:** Migrations, SAGA pattern, Circuit Breaker, Monitoring, Concurrency, Projections and system reliability.
+
 
 ## Education
-**BS Computer Science**  
-University of Technology, 2018
+- **Analysis and Software Development**
+Federal Institute of Technology Catarinense, 2012
+- **Technical Certificate in Informatics and Software Development**
+Federal Institute of Technology Santa Catarina, 2012
 `;
 
-export const BLOG_POSTS: BlogPost[] = [
-  {
-    slug: 'minimalism-in-code',
-    title: 'Minimalism in Code',
-    date: 'October 12, 2023',
-    description: 'Why writing less code is often better than writing more.',
-    tags: ['Coding', 'Philosophy'],
-    content: `
-# Minimalism in Code
 
-Software engineering often feels like a race to add features. We build, we ship, we iterate. But in the process, we accumulate debt. Not just technical debt, but *cognitive* debt.
+import fm from 'front-matter';
 
-## The Cost of Complexity
+// Load markdown files
+const markdownFiles = import.meta.glob('./src/posts/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true
+});
 
-Every line of code you write is a liability. It must be read, understood, tested, and maintained. The more code you have, the harder it is to change.
+interface PostAttributes {
+  slug: string;
+  title: string;
+  date: string;
+  description: string;
+  tags: string[];
+}
 
-> "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away." - Antoine de Saint-Exupéry
+export const BLOG_POSTS: BlogPost[] = Object.keys(markdownFiles).map((path) => {
+  const content = markdownFiles[path] as string;
+  const parsed = fm<PostAttributes>(content);
 
-## Strategies for Reduction
-
-1. **YAGNI (You Aren't Gonna Need It):** Don't build features for a hypothetical future.
-2. **DRY (Don't Repeat Yourself):** Abstraction is good, but premature abstraction is the root of all evil.
-3. **Delete Code:** Celebrate deleting code as much as writing it.
-
-## Conclusion
-
-Strive for elegance. Simple code is robust code.
-    `
-  },
-  {
-    slug: 'mastering-react-hooks',
-    title: 'Mastering React Hooks',
-    date: 'September 28, 2023',
-    description: 'A deep dive into useEffect and useCallback nuances.',
-    tags: ['React', 'Tutorial'],
-    content: `
-# Mastering React Hooks
-
-React Hooks changed the way we write components. However, they introduced new pitfalls, specifically around dependency arrays and closures.
-
-## The \`useEffect\` Trap
-
-One of the most common mistakes is ignoring the linter.
-
-\`\`\`tsx
-// Bad
-useEffect(() => {
-  fetchData(id);
-}, []); // eslint-disable-line
-\`\`\`
-
-If \`id\` changes, this effect won't run. This leads to stale data bugs that are hard to debug.
-
-## Stable References with \`useCallback\`
-
-When passing functions to child components, referential integrity matters.
-
-\`\`\`tsx
-const handleClick = useCallback(() => {
-  console.log('Clicked');
-}, []);
-\`\`\`
-
-By using \`useCallback\`, we ensure \`handleClick\` stays the same function instance across renders, preventing unnecessary re-renders of pure child components.
-    `
-  },
-  {
-    slug: 'design-systems-101',
-    title: 'Design Systems 101',
-    date: 'August 15, 2023',
-    description: 'Building a consistent visual language for your products.',
-    tags: ['Design', 'System'],
-    content: `
-# Design Systems 101
-
-A design system is more than just a style guide. It's a collection of reusable components, guided by clear standards, that can be assembled together to build any number of applications.
-
-## Key Components
-
-- **Design Tokens:** The atomic values (colors, spacing, typography).
-- **Component Library:** The building blocks (Buttons, Inputs, Modals).
-- **Patterns:** Reusable combinations of components (Forms, Cards).
-
-## Why You Need One
-
-Consistency breeds trust. When your application looks and behaves consistently, users feel more comfortable and confident using it.
-    `
-  }
-];
+  return {
+    slug: parsed.attributes.slug,
+    title: parsed.attributes.title,
+    date: parsed.attributes.date,
+    description: parsed.attributes.description,
+    tags: parsed.attributes.tags,
+    content: parsed.body
+  };
+});

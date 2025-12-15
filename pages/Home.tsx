@@ -13,8 +13,8 @@ const Home: React.FC = () => {
           Simplicity is the ultimate sophistication.
         </h1>
         <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-          I'm Alex, a frontend engineer passionate about building clean, accessible, and high-performance user interfaces. 
-          Currently building the future of fintech at TechCorp.
+          I'm Luciano, a software engineer passionate about building clean, accessible, and high-performance applications.
+          Currently building after-sales solutions at Worten.
         </p>
         <div className="flex gap-4 pt-4">
           <Link
@@ -59,8 +59,8 @@ const Home: React.FC = () => {
         <p className="text-muted-foreground mb-6">
           I am currently open to freelance opportunities and consulting. If you have a project in mind, let's talk.
         </p>
-        <a 
-          href="mailto:hello@example.com" 
+        <a
+          href="mailto:hello@example.com"
           className="text-primary font-medium hover:underline underline-offset-4"
         >
           Get in touch &rarr;

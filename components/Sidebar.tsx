@@ -13,11 +13,11 @@ const Sidebar: React.FC = () => {
 
   const getIcon = (iconName: string) => {
     switch (iconName.toLowerCase()) {
-        case 'github': return <Github size={18} />;
-        case 'twitter': return <Twitter size={18} />;
-        case 'linkedin': return <Linkedin size={18} />;
-        case 'mail': return <Mail size={18} />;
-        default: return <User size={18} />;
+      case 'github': return <Github size={18} />;
+      case 'twitter': return <Twitter size={18} />;
+      case 'linkedin': return <Linkedin size={18} />;
+      case 'mail': return <Mail size={18} />;
+      default: return <User size={18} />;
     }
   };
 
@@ -26,8 +26,8 @@ const Sidebar: React.FC = () => {
       <div className="p-6">
         <div className="mb-8 flex justify-between items-start">
           <NavLink to="/" className="block">
-            <h1 className="text-2xl font-bold tracking-tight text-primary">Alex Dev</h1>
-            <p className="text-sm text-muted-foreground mt-1">Frontend Engineer & Minimalist</p>
+            <h1 className="text-2xl font-bold tracking-tight text-primary">Luciano Junior</h1>
+            <p className="text-sm text-muted-foreground mt-1">Software Engineer</p>
           </NavLink>
           <ThemeToggle />
         </div>
@@ -38,10 +38,9 @@ const Sidebar: React.FC = () => {
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                  isActive
-                    ? 'bg-secondary text-secondary-foreground'
-                    : 'text-muted-foreground hover:text-primary hover:bg-accent'
+                `flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md transition-colors ${isActive
+                  ? 'bg-secondary text-secondary-foreground'
+                  : 'text-muted-foreground hover:text-primary hover:bg-accent'
                 }`
               }
             >
@@ -54,21 +53,20 @@ const Sidebar: React.FC = () => {
 
       {/* Mobile Nav (Horizontal Scroll) - Visible only on small screens */}
       <nav className="md:hidden flex overflow-x-auto px-4 pb-4 gap-4 no-scrollbar border-t border-border pt-4 bg-background">
-         {navItems.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-2 text-sm font-medium whitespace-nowrap rounded-md transition-colors ${
-                  isActive
-                    ? 'bg-secondary text-secondary-foreground'
-                    : 'text-muted-foreground hover:text-primary'
-                }`
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
+        {navItems.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            className={({ isActive }) =>
+              `flex items-center gap-2 px-3 py-2 text-sm font-medium whitespace-nowrap rounded-md transition-colors ${isActive
+                ? 'bg-secondary text-secondary-foreground'
+                : 'text-muted-foreground hover:text-primary'
+              }`
+            }
+          >
+            {item.label}
+          </NavLink>
+        ))}
       </nav>
 
       <div className="p-6 hidden md:block">
