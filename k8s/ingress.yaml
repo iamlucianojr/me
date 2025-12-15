@@ -4,10 +4,11 @@ metadata:
   name: portfolio-ingress
   namespace: portfolio
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/issuer: letsencrypt-portfolio
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true" # Nginx specific
 spec:
-  ingressClassName: nginx
+  # ingressClassName: nginx # Removing to let default controller (Traefik) pick it up
   tls:
     - hosts:
         - lucianojr.com.br
