@@ -1,0 +1,5 @@
+{
+  "name": "Minimalist Personal Portfolio",
+  "description": "A minimalist personal website featuring a blog and resume, inspired by the Brooks theme. Built with React, Tailwind CSS, and Markdown rendering.",
+  "requestFramePermissions": []
+}
